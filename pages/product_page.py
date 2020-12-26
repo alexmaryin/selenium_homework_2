@@ -47,6 +47,11 @@ class ProductPage(BasePage):
         self.get_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON).click()
         self.solve_quiz_and_get_code()
 
+    def add_to_basket(self):
+        self.grub_product_name_and_price()
+        self.should_present_add_to_basket_btn()
+        self.get_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON).click()
+
     def is_product_in_basket_popups(self):
         self.should_popup_add_to_basket()
         self.should_popup_info_with_basket_total()
