@@ -30,6 +30,7 @@ class TestLoginFromProductPage:
         page.open()
         page.should_be_login_link()
 
+    @pytest.mark.need_review
     def test_guest_can_go_to_login_page_from_product_page(self, browser):
         page = ProductPage(browser, link_product_no_promo)
         page.open()
@@ -39,6 +40,7 @@ class TestLoginFromProductPage:
 @pytest.mark.product_page_test
 class TestProductPageAsGuest:
 
+    @pytest.mark.need_review
     def test_guest_can_add_product_to_basket(self, browser):
         product_page = ProductPage(browser, link_product_no_promo)
         product_page.open()
@@ -101,6 +103,7 @@ class TestProductPageAsUser:
         product_page.open()
         product_page.should_not_be_success_message()
 
+    @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
         product_page = ProductPage(browser, link_product_no_promo)
         product_page.open()
@@ -111,6 +114,7 @@ class TestProductPageAsUser:
 @pytest.mark.basket_page_test
 class TestBasketFromProductPage:
 
+    @pytest.mark.need_review
     def test_guest_cant_see_product_in_basket_opened_from_product_page(self, browser):
         product_page = BasketPage(browser, link_product_no_promo)
         product_page.open()
