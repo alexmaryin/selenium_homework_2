@@ -1,8 +1,8 @@
 import pytest
-
 from pages.BasketPage import BasketPage
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
+
 
 link_index = r'http://selenium1py.pythonanywhere.com/'
 

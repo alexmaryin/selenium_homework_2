@@ -11,22 +11,11 @@ class BasePage:
         self.url = url
         self.browser.implicitly_wait(timeout)
 
-    def go_to_login_page(self):
-        self.browser.find_element(*BasePageLocators.LOGIN_LINK).click()
-
-    def go_to_basket(self):
-        self.should_be_basket_link()
-        self.browser.find_element(*BasePageLocators.BASKET_LINK).click()
-
-    def should_be_login_link(self):
-        self.is_element_present(*BasePageLocators.LOGIN_LINK), 'Login links is missed!'
-
-    def should_be_basket_link(self):
-        self.is_element_present(*BasePageLocators.BASKET_LINK), 'Basket link is missed!'
-
+    # opens browser with link from constructor
     def open(self):
         self.browser.get(self.url)
 
+    # return true if element is present on page
     def is_element_present(self, how, what):
         try:
             self.browser.find_element(how, what)
@@ -34,12 +23,14 @@ class BasePage:
             return False
         return True
 
+    # return element on page if present
     def get_element(self, how, what):
         if self.is_element_present(how, what):
             return self.browser.find_element(how, what)
         else:
             return None
 
+    # return true if element is not present on page
     def is_element_not_present(self, how, what, timeout=4):
         try:
             WebDriverWait(self.browser, timeout, 1, TimeoutException).until(EC.presence_of_element_located((how, what)))
@@ -47,6 +38,7 @@ class BasePage:
             return True
         return False
 
+    # return true if element is disappear from page before timeout
     def is_element_disappeared(self, how, what, timeout=4):
         try:
             WebDriverWait(self.browser, timeout, 1, TimeoutException)\
@@ -55,6 +47,24 @@ class BasePage:
             return False
         return True
 
+    # goes to login page
+    def go_to_login_page(self):
+        self.browser.find_element(*BasePageLocators.LOGIN_LINK).click()
+
+    # goes to basket page
+    def go_to_basket(self):
+        self.should_be_basket_link()
+        self.browser.find_element(*BasePageLocators.BASKET_LINK).click()
+
+    # check for login link available
+    def should_be_login_link(self):
+        self.is_element_present(*BasePageLocators.LOGIN_LINK), 'Login links is missed!'
+
+    # check for basket link available
+    def should_be_basket_link(self):
+        self.is_element_present(*BasePageLocators.BASKET_LINK), 'Basket link is missed!'
+
+    # super bot-driven captcha resolver
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]

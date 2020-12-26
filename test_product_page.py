@@ -61,7 +61,9 @@ class TestProductPageAsGuest:
         product_page.add_to_basket_promo('newYear')
         product_page.should_success_disappears()
 
+    # Turn off for prevent waste of time of dear reviewers
     @pytest.mark.parametrize('link', promo_links_group)
+    @pytest.mark.skip
     def test_guest_can_add_product_to_basket_group(self, browser, link):
         product_page = ProductPage(browser, link)
         product_page.open()
