@@ -13,7 +13,7 @@ class ProductPage(BasePage):
     def should_present_add_to_basket_btn(self):
         assert self.is_element_present(*ProductPageLocators.ADD_TO_BASKET_BUTTON), 'Add to basket form is missing!'
 
-    # puts product name and its price to class properties introduced above
+    # put product name and its price to class properties introduced above
     def grub_product_name_and_price(self):
         product = self.get_element(*ProductPageLocators.PRODUCT_NAME)
         assert product is not None, 'Product name was not found on page!'

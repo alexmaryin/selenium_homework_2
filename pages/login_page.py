@@ -24,4 +24,3 @@ class LoginPage(BasePage):
         self.get_element(*LoginPageLocators.PASSWORD_INPUT).send_keys(password)
         self.get_element(*LoginPageLocators.CONFIRM_PASSWORD_INPUT).send_keys(password)
         self.get_element(*LoginPageLocators.REGISTER_BUTTON).click()
-
