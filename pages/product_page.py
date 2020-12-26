@@ -31,6 +31,12 @@ class ProductPage(BasePage):
         # print(alerts_info)          # for debug!
         assert self.product_price in alerts_info, 'Total price in basket should be equal to price of product!'
 
+    def should_not_be_success_message(self):
+        assert self.is_element_not_present(*ProductPageLocators.ALERT_MESSAGES), 'Success message should not present on page!'
+
+    def should_success_disappears(self):
+        assert self.is_element_disappeared(*ProductPageLocators.ALERT_MESSAGES), 'Success message should disappear in 4 sec!'
+
     def add_to_basket_promo(self, promo):
         self.should_be_promo_url(promo)
         self.grub_product_name_and_price()
