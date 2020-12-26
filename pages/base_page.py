@@ -14,8 +14,15 @@ class BasePage:
     def go_to_login_page(self):
         self.browser.find_element(*BasePageLocators.LOGIN_LINK).click()
 
+    def go_to_basket(self):
+        self.should_be_basket_link()
+        self.browser.find_element(*BasePageLocators.BASKET_LINK).click()
+
     def should_be_login_link(self):
         self.is_element_present(*BasePageLocators.LOGIN_LINK), 'Login links is missed!'
+
+    def should_be_basket_link(self):
+        self.is_element_present(*BasePageLocators.BASKET_LINK), 'Basket link is missed!'
 
     def open(self):
         self.browser.get(self.url)

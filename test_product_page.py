@@ -1,5 +1,6 @@
 import pytest
 
+from pages.BasketPage import BasketPage
 from pages.product_page import ProductPage
 
 link_shell_coders = r'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear'
@@ -66,3 +67,13 @@ class TestProductPageAsGuest:
         product_page.open()
         product_page.add_to_basket_promo(link.partition('promo=')[2])
         product_page.is_product_in_basket_popups()
+
+
+@pytest.mark.basket_page_test
+class TestBasketFromProductPage:
+
+    def test_guest_cant_see_product_in_basket_opened_from_product_page(self, browser):
+        product_page = BasketPage(browser, link_coders_at_work)
+        product_page.open()
+        product_page.go_to_basket()
+        product_page.should_be_empty_basket_info()
