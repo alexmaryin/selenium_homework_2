@@ -7,8 +7,8 @@ class ProductPage(BasePage):
     product_name = None
     product_price = None
 
-    def should_be_promo_url(self):
-        assert 'promo=newYear' in self.browser.current_url, 'Attribute New Year prono is missed in url!'
+    def should_be_promo_url(self, promo):
+        assert f'promo={promo}' in self.browser.current_url, 'Attribute promo is missed in url!'
 
     def should_present_add_to_basket_btn(self):
         assert self.is_element_present(*ProductPageLocators.ADD_TO_BASKET_BUTTON), 'Add to basket form is missing!'
@@ -31,8 +31,8 @@ class ProductPage(BasePage):
         # print(alerts_info)          # for debug!
         assert self.product_price in alerts_info, 'Total price in basket should be equal to price of product!'
 
-    def add_to_basket_promo(self):
-        self.should_be_promo_url()
+    def add_to_basket_promo(self, promo):
+        self.should_be_promo_url(promo)
         self.grub_product_name_and_price()
         self.should_present_add_to_basket_btn()
         self.get_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON).click()
