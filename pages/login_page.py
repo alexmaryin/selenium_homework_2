@@ -1,8 +1,14 @@
+import string
+import time
+from random import sample
 from .base_page import BasePage
 from .locators import LoginPageLocators
 
 
 class LoginPage(BasePage):
+
+    email = None
+    password = None
 
     def should_be_login_page(self):
         self.should_be_login_url()
@@ -17,3 +23,12 @@ class LoginPage(BasePage):
 
     def should_be_register_form(self):
         assert self.is_element_present(*LoginPageLocators.REGISTER_FORM), 'register form is missing!'
+
+    def register_new_user(self, email, password):
+        self.should_be_login_form()
+        self.email = str(time.time()) + "@fakemail.org"
+        self.password = ''.join(sample(string.ascii_letters+string.digits, 10))
+        self.get_element(*LoginPageLocators.EMAIL_INPUT).send_keys(self.email)
+        self.get_element(*LoginPageLocators.PASSWORD_INPUT).send_keys(self.password)
+        self.get_element(*LoginPageLocators.CONFIRM_PASSWORD_INPUT).send_keys(self.password)
+

@@ -64,6 +64,10 @@ class BasePage:
     def should_be_basket_link(self):
         self.is_element_present(*BasePageLocators.BASKET_LINK), 'Basket link is missed!'
 
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
+
     # super bot-driven captcha resolver
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
